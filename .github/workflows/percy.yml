@@ -29,5 +29,6 @@ jobs:
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_BRANCH: ${{ github.head_ref }}
+          PERCY_TARGET_BRANCH: ${{ github.base_ref }}
           PERCY_PULL_REQUEST: ${{ github.event.number }}
         run: pnpm exec percy snapshot ./out

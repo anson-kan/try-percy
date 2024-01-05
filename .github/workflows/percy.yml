@@ -1,0 +1,33 @@
+name: Percy CI
+
+on:
+  pull_request:
+
+jobs:
+  percy-snapshots:
+    name: Run Lighthouse against static build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Taken snapshots
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+          PERCY_BRANCH: ${{ github.head_ref }}
+          PERCY_PULL_REQUEST: ${{ github.event.number }}
+        run:

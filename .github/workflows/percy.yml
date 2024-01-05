@@ -5,7 +5,7 @@ on:
 
 jobs:
   percy-snapshots:
-    name: Run Lighthouse against static build
+    name: Run Percy snapshots test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

@@ -30,4 +30,4 @@ jobs:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
           PERCY_BRANCH: ${{ github.head_ref }}
           PERCY_PULL_REQUEST: ${{ github.event.number }}
-        run:
+        run: pnpm exec percy snapshot ./out
